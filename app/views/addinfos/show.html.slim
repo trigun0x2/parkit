@@ -1,0 +1,23 @@
+- model_class = Addinfo
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.titleize
+
+p
+  strong= model_class.human_attribute_name(:user_id) + ':'
+  br
+  = @addinfo.user_id
+p
+  strong= model_class.human_attribute_name(:address) + ':'
+  br
+  = @addinfo.address
+p
+  strong= model_class.human_attribute_name(:phonenumber) + ':'
+  br
+  = @addinfo.phonenumber
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), addinfos_path, :class => 'btn'
+  '
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_addinfo_path(@addinfo), :class => 'btn'
+  '
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), addinfo_path(@addinfo), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

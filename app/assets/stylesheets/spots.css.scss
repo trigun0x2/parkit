@@ -1,0 +1,21 @@
+// Place all the styles related to the Spots controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.inputleft{
+	label{
+		width: auto !important; 
+	}
+	.controls{
+		margin-left: 80px;
+		input{
+			width: 100%;
+		}
+	}
+}
+
+.page-header{
+	h1{
+		display: inline-block;
+		padding-right: 20px;
+	}
+}

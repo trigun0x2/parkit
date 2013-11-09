@@ -1,0 +1,25 @@
+= form_for @reservation, :html => { :class => "form-horizontal" } do |f|
+  .control-group
+    = f.label :user_id, :class => 'control-label'
+    .controls
+      = f.number_field :user_id, :class => 'number_field'
+  .control-group
+    = f.label :spot_id, :class => 'control-label'
+    .controls
+      = f.number_field :spot_id, :class => 'number_field'
+  .control-group
+    = f.label :requestuser_id, :class => 'control-label'
+    .controls
+      = f.number_field :requestuser_id, :class => 'number_field'
+  .control-group
+    = f.label :restime, :class => 'control-label'
+    .controls
+      = f.datetime_select :restime, :class => 'datetime_select'
+  .control-group
+    = f.label :completed, :class => 'control-label'
+    .controls
+      = f.check_box :completed, :class => 'check_box'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), reservations_path, :class => 'btn'

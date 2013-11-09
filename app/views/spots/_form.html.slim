@@ -1,0 +1,59 @@
+javascript:
+  var map;
+  $(document).ready(function(){
+    map = new GMaps({
+      div: '#map',
+      lat: -12.043333,
+      lng: -77.028333
+    });
+    GMaps.geolocate({
+      success: function(position) {
+        map.setCenter(position.coords.latitude, position.coords.longitude);
+      }
+    });
+  });
+.container-fluid
+      .row-fluid
+        .span4
+          = form_for @spot, :html => { :class => "form-horizontal" } do |f|
+            .control-group.inputleft
+              = f.label :address, :class => 'control-label'
+              .controls
+                = f.text_field :address, :class => 'text_field'
+            .control-group.hide
+              = f.label :latitude, :class => 'control-label'
+              .controls
+                = f.text_field :latitude, :class => 'text_field'
+            .control-group.hide
+              = f.label :longitude, :class => 'control-label'
+              .controls
+                = f.text_field :longitude, :class => 'text_field'
+            = f.submit nil, :class => 'btn btn-primary'
+            '
+            = link_to t('.cancel', :default => t("helpers.links.cancel")), spots_path, :class => 'btn'
+        .span8
+          div id="map" style='width: 100%; height: 400px;'
+
+javascript:
+  $(document).ready(function(){
+    $('#spot_address').bind('blur keyup', function(e){
+      if(e.type === 'keyup' && e.keyCode !== 10 && e.keyCode !== 13) return;
+      var latlng;
+      GMaps.geocode({
+        address: $('#spot_address').val().trim(),
+        callback: function(results, status){
+          if(status=='OK'){
+            latlng = results[0].geometry.location;
+            $('#spot_latitude').val(latlng.lat());
+            $('#spot_longitude').val(latlng.lng());
+            map.setCenter(latlng.lat(), latlng.lng());
+            map.addMarker({
+              lat: latlng.lat(),
+              lng: latlng.lng()
+            });
+          }
+        }
+      });
+    });
+
+  });
