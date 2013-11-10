@@ -3,8 +3,8 @@ javascript:
   $(document).ready(function(){
     map = new GMaps({
       div: '#map',
-      lat: #{@spot.latitude},
-      lng: #{@spot.longitude}
+      lat: #{raw @spot.latitude},
+      lng: #{raw @spot.longitude}
     });
     map.addMarker({
       lat: #{@spot.latitude},

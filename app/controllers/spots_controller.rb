@@ -2,8 +2,7 @@ class SpotsController < ApplicationController
   # GET /spots
   # GET /spots.json
   def index
-    @spots = Spot.all
-
+    @spots = Spot.includes([:user, :reservation]).all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @spots }

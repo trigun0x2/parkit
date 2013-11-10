@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109052845) do
+ActiveRecord::Schema.define(:version => 20131109233102) do
 
   create_table "addinfos", :force => true do |t|
     t.integer  "user_id"
@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(:version => 20131109052845) do
     t.integer  "spot_id"
     t.integer  "requestuser_id"
     t.datetime "restime"
-    t.boolean  "completed"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.boolean  "completed",      :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "spots", :force => true do |t|

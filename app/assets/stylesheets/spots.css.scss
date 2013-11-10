@@ -12,7 +12,13 @@
 		}
 	}
 }
-
+.selected{
+	background-color: #3498db !important;
+	color: white;
+	.addresslink{
+		color: white;
+	}
+}
 .page-header{
 	h1{
 		display: inline-block;

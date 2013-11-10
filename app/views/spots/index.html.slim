@@ -4,20 +4,39 @@ javascript:
     map = new GMaps({
       div: '#map',
       lat: #{@spots.first.latitude},
-      lng: #{@spots.first.longitude}
+      lng: #{@spots.first.longitude},
+      zoom: 12
     });
     GMaps.geolocate({
       success: function(position) {
         map.setCenter(position.coords.latitude, position.coords.longitude);
       }
     });
-    var spots = #{@spots.to_json};
-    $(spots).each(function(index, obj) {
+    var spots = #{raw @spots.to_json};
+    $(spots).each(function(index, spot) {
       map.addMarker({
         lat: spot.latitude,
         lng: spot.longitude,
-        title: "spot",
+        title: "" + spot.id,
+        infoWindow: {
+          content: '<p>User ID: '+spot.user_id+'</p>'
+        },
+        click: function(e) {
+          console.log(e.title); 
+          map.setCenter(e.position.nb, e.position.ob);
+          $('tr>td').removeClass('selected');
+          $('tr#'+e.title+'>td').addClass('selected');
+        }
       });
+    });
+    // Select bottom to go to top
+    $('tr>td').click(function(){
+      $('tr>td').removeClass('selected');
+      $(this).parent().find('td').addClass('selected');
+      lat=$(this).parent().data('lat');
+      lng=$(this).parent().data('lng');
+      map.setCenter(lat, lng);
+      map.setZoom(18);
     });
   });
   
@@ -26,6 +45,9 @@ javascript:
 div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
   = link_to t('.new', :default => t("helpers.links.new")), new_spot_path, :class => 'btn btn-primary'
+
+div id="map" style='width: 100%; height: 400px;'
+
 table class="table table-striped"
   thead
     tr
@@ -34,11 +56,10 @@ table class="table table-striped"
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @spots.each do |spot|
-      tr
+      tr id="#{spot.id}" data-lat="#{spot.latitude}" data-lng="#{spot.longitude}"
         td= spot.user_id
-        td= link_to spot.address, spot_path(spot)
+        td= link_to spot.address, spot_path(spot), class: 'addresslink'
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_spot_path(spot), :class => 'btn btn-mini'
           '
           = link_to t('.destroy', :default => t("helpers.links.destroy")), spot_path(spot), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-div id="map" style='width: 100%; height: 400px;'

@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
-
+    @spots = Spot.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reservation }
@@ -41,7 +41,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @reservation = Reservation.new(params[:reservation])
-
+    @reservation.requestuser = current_user.id
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
