@@ -1,17 +1,37 @@
-javascript:
-  var map;
-  $(document).ready(function(){
-    map = new GMaps({
-      div: '#map',
-      lat: -12.043333,
-      lng: -77.028333
+-if !@spot.latitude.nil?
+  javascript:
+    var map;
+    $(document).ready(function(){
+      map = new GMaps({
+        div: '#map',
+        lat: '#{@spot.latitude}',
+        lng: '#{@spot.longitude}'
+      });
+      map.addMarker({
+        lat: '#{@spot.latitude}',
+        lng: '#{@spot.longitude}',
+        title: '#{@spot.id}',
+        infoWindow: {
+          content: '<p>User ID: #{@spot.user_id}</p>'
+        }
+      });
     });
-    GMaps.geolocate({
-      success: function(position) {
-        map.setCenter(position.coords.latitude, position.coords.longitude);
-      }
+
+-else 
+  javascript:
+    var map;
+    $(document).ready(function(){
+      map = new GMaps({
+        div: '#map',
+        lat: -12.043333,
+        lng: -77.028333
+      });
+      GMaps.geolocate({
+        success: function(position) {
+          map.setCenter(position.coords.latitude, position.coords.longitude);
+        }
+      });
     });
-  });
 .container-fluid
       .row-fluid
         .span4

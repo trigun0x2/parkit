@@ -23,7 +23,11 @@ class SpotsController < ApplicationController
   # GET /spots/new
   # GET /spots/new.json
   def new
-    @spot = Spot.new
+    if params[:spotid]
+      @spot = Spot.find(params[:spotid])
+    else
+      @spot = Spot.new
+    end
 
     respond_to do |format|
       format.html # new.html.erb

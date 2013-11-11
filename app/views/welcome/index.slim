@@ -1,1 +1,10 @@
-h1 Welcome
+doctype html
+html lang="en"
+  head
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+  body
+    div.welcome
+      div.links.cl-effect-1
+        = link_to "Spots", spots_path
+        = link_to "New Reservation", new_reservation_path

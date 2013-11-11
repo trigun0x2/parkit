@@ -2,11 +2,7 @@
   .control-group
     = f.label :spot_id, :class => 'control-label'
     .controls
-      = f.number_field :spot_id, :class => 'number_field'
-  .control-group
-    = f.label :requestuser_id, :class => 'control-label'
-    .controls
-      = f.number_field :requestuser_id, :class => 'number_field'
+      = collection_select(:spot_id, 0, Spot.all, :id, :address)
   .control-group
     = f.label "Reservation Time", :class => 'control-label'
     .controls
@@ -15,3 +11,5 @@
     = f.submit nil, :class => 'btn btn-primary'
     '
     = link_to t('.cancel', :default => t("helpers.links.cancel")), reservations_path, :class => 'btn'
+
+    

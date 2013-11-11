@@ -4,24 +4,17 @@ div class="page-header"
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:user_id)
       th= model_class.human_attribute_name(:spot_id)
-      th= model_class.human_attribute_name(:requestuser_id)
       th= model_class.human_attribute_name(:restime)
-      th= model_class.human_attribute_name(:completed)
-      th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @reservations.each do |reservation|
       tr
-        td= link_to reservation.id, reservation_path(reservation)
+        / td= link_to reservation.id, reservation_path(reservation)
         td= reservation.user_id
         td= reservation.spot_id
-        td= reservation.requestuser_id
         td= reservation.restime
-        td= reservation.completed
-        td=l reservation.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_reservation_path(reservation), :class => 'btn btn-mini'
           '
