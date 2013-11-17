@@ -1,3 +1,25 @@
 // Place all the styles related to the Reservations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#new_reservation{
+	#reservation_restime_1i{
+		width: 20%;
+		display: inline-block;
+	}
+	#reservation_restime_2i{
+		width: 60%;
+		display: inline-block;
+	}
+	#reservation_restime_3i{
+		width: 20%;
+		display: inline-block;
+	}
+	#reservation_restime_4i{
+		width: 20%;
+		display: inline-block;
+	}
+	#reservation_restime_5i{
+		width: 20%;
+		display: inline-block;
+	}
+}
